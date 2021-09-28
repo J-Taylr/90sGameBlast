@@ -1,62 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &969064775807549449
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8331401726826077218}
-  - component: {fileID: 223122261193712353}
-  m_Layer: 0
-  m_Name: ColliderCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8331401726826077218
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 969064775807549449}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1171714433645842272}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &223122261193712353
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 969064775807549449}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.020019531, y: 0.00000047683716}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 21.914879, y: 12.847135}
-  m_EdgeRadius: 0
 --- !u!1 &1171714432597055844
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,6 +637,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1171714433645842272}
   - component: {fileID: 8571703001490252860}
+  - component: {fileID: 1501099052897320369}
   m_Layer: 0
   m_Name: StartingRoom
   m_TagString: StartingRoom
@@ -712,8 +656,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8331401726826077218}
   - {fileID: 1171714433849767012}
+  - {fileID: 228856520844613419}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -729,20 +673,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa56fd920018c47429d61697a10f8bd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  col: {fileID: 223122261193712353}
   dungeonManager: {fileID: 0}
+  camPos: {fileID: 6075278719448342524}
+  roomActive: 1
+  roomPrefab: {fileID: 1171714433645842273}
+  isStartingRoom: 1
+  finished: 0
+  checkradius: 1
   connectors:
   - {fileID: 9209534063294792681}
   - {fileID: 1615114038610290410}
   - {fileID: 7741563111803794447}
   - {fileID: 7207541566271852478}
-  roomPrefab: {fileID: 1171714433645842273}
-  finished: 0
-  isStartingRoom: 1
   topOffset: 6.07
   bottomOffset: -6.07
   leftOffset: -10.5
   rightOffset: 10.5
+--- !u!61 &1501099052897320369
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171714433645842273}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 20.678122, y: 11.629574}
+  m_EdgeRadius: 0
 --- !u!1 &1171714433823751734
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,7 +866,7 @@ Transform:
   - {fileID: 720379862638227843}
   - {fileID: 474733761142934066}
   m_Father: {fileID: 1171714433645842272}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1171714434057480535
 GameObject:
@@ -1196,6 +1168,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &6075278719448342524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 228856520844613419}
+  m_Layer: 0
+  m_Name: CameraPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &228856520844613419
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6075278719448342524}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1171714433645842272}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3332624786509973382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1484,11 +1486,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5105dea9ebb55e64bb761e790a30c683, type: 3}
---- !u!4 &474733761142934066 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6540658455348929760, guid: 5105dea9ebb55e64bb761e790a30c683, type: 3}
-  m_PrefabInstance: {fileID: 6652803878997012178}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7207541566271852478 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4059385106619048300, guid: 5105dea9ebb55e64bb761e790a30c683, type: 3}
@@ -1500,3 +1497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d54f7f974cea4724dbce28329cef7472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &474733761142934066 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6540658455348929760, guid: 5105dea9ebb55e64bb761e790a30c683, type: 3}
+  m_PrefabInstance: {fileID: 6652803878997012178}
+  m_PrefabAsset: {fileID: 0}

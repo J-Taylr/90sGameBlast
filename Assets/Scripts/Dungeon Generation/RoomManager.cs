@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-
-    public BoxCollider2D col;
+    [Header("Components")]
 
     public DungeonManager dungeonManager;
-    public Connector[] connectors;
+    private CameraMover cam;
+    public GameObject camPos;
+
+    [Header("In-Game Attributes")]
+    public bool roomActive = true;
+
+
+    [Header("Dungeon Creation")]
     public GameObject roomPrefab;
-    public bool finished = false;
-
     public bool isStartingRoom;
+    public bool finished = false;
+    public float checkradius = 1f;
 
+    [Header("Connectors")]
+
+    public Connector[] connectors;
     public float topOffset;
     public float bottomOffset;
     public float leftOffset;
@@ -21,11 +30,22 @@ public class RoomManager : MonoBehaviour
 
 
 
+
     private void Awake()
     {
-        dungeonManager = GameObject.FindGameObjectWithTag("DungeonManager").GetComponent<DungeonManager>();
+        cam = Camera.main.GetComponent<CameraMover>();
+       // dungeonManager = GameObject.FindGameObjectWithTag("DungeonManager").GetComponent<DungeonManager>();
     }
 
+
+    public void BeginRoomCheck()
+    {
+        foreach (var connector in connectors)
+        {
+            CheckForWalls(connector);
+        }
+        AssignConnectors();
+    }
 
     public void AssignConnectors()
     {
@@ -56,10 +76,46 @@ public class RoomManager : MonoBehaviour
             
         }
         finished = true;
-        dungeonManager.editBuffer = false;
+        
         CheckDungeon();
     }
 
+    public void CheckOverlap()
+    {
+        Collider2D[] overlapResult = Physics2D.OverlapCircleAll(transform.position, .1f);
+
+        foreach (var collision in overlapResult)
+        {
+            if (collision.gameObject.CompareTag("Room") || collision.gameObject.CompareTag("StartingRoom"))
+            {
+
+                if (collision.gameObject != this.gameObject)
+                {
+                    print("overlap");
+                    //dungeonManager.activeRooms.Remove(this);
+                    Destroy(this.gameObject);
+                }
+
+               
+            }
+        }
+    }
+
+
+    public void CheckForWalls(Connector connector)
+    {
+        Collider2D[] hitResults = Physics2D.OverlapCircleAll(connector.transform.position, checkradius);
+
+        foreach (var item in hitResults)
+        {
+            if (item.gameObject.CompareTag("Connector"))
+            {
+                connector.EnableWall();
+                
+            }
+        }
+
+    }
 
     public void AllignRoom(Connector connector, RoomManager newRoom)
     {
@@ -94,6 +150,7 @@ public class RoomManager : MonoBehaviour
                 newconnectors.isDoor = true;
                 newconnectors.DisableWall();
             }
+            
         }
     }
 
@@ -118,12 +175,19 @@ public class RoomManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Room"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            dungeonManager.activeRooms.Remove(this);
-            Destroy(this.gameObject);
-        }
+            roomActive = true;
+            cam.MoveCamera(camPos.transform);
+        }   
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            roomActive = false;
+        }
+    }
 }
 

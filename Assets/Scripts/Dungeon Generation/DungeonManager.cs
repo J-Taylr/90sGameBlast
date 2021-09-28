@@ -46,6 +46,7 @@ public class DungeonManager : MonoBehaviour
     {
         foreach (var room in activeRooms)
         {
+
             foreach (var connector in room.connectors)
             {
                 if (connector.isDoor == false)
@@ -53,6 +54,9 @@ public class DungeonManager : MonoBehaviour
                     connector.EnableWall();
                 }
             }
+
+            room.CheckOverlap();
+
         }
     }
 
