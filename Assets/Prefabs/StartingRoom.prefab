@@ -676,7 +676,7 @@ MonoBehaviour:
   dungeonManager: {fileID: 0}
   camPos: {fileID: 6075278719448342524}
   roomActive: 1
-  roomPrefab: {fileID: 1171714433645842273}
+  roomPrefab: {fileID: 7401114474955235405, guid: b8323d5185eb4a94d81a0798e310ffc8, type: 3}
   isStartingRoom: 1
   finished: 0
   checkradius: 1

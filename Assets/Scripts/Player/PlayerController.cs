@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [Header("Roll")]
     public float rollDelay = 0.5f;
     public float rollTime = 0.1f;
+    public bool isRolling;
     public bool rollAvailable;
 
 
@@ -63,7 +64,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator playerRoll()
     {
-        print("roll");
+
+        isRolling = true;
         var vel = rb.velocity;
         
         moveSpeed *= 2;
@@ -71,7 +73,7 @@ public class PlayerController : MonoBehaviour
         
         yield return new WaitForSeconds(rollTime);
         moveSpeed /= 2;
-
+        isRolling = false;
         
 
         yield return new WaitForSeconds(rollDelay);
