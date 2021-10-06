@@ -638,6 +638,7 @@ GameObject:
   - component: {fileID: 1171714433645842272}
   - component: {fileID: 8571703001490252860}
   - component: {fileID: 1501099052897320369}
+  - component: {fileID: 3732305324585716542}
   m_Layer: 0
   m_Name: StartingRoom
   m_TagString: StartingRoom
@@ -674,8 +675,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dungeonManager: {fileID: 0}
-  camPos: {fileID: 6075278719448342524}
-  roomActive: 1
   roomPrefab: {fileID: 7401114474955235405, guid: b8323d5185eb4a94d81a0798e310ffc8, type: 3}
   isStartingRoom: 1
   finished: 0
@@ -685,10 +684,10 @@ MonoBehaviour:
   - {fileID: 1615114038610290410}
   - {fileID: 7741563111803794447}
   - {fileID: 7207541566271852478}
-  topOffset: 6.07
-  bottomOffset: -6.07
-  leftOffset: -10.5
-  rightOffset: 10.5
+  topOffset: {x: 0, y: 6.07, z: 0}
+  bottomOffset: {x: 0, y: -6.07, z: 0}
+  leftOffset: {x: 10.5, y: 0, z: 0}
+  rightOffset: {x: -10.5, y: 0, z: 0}
 --- !u!61 &1501099052897320369
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -715,6 +714,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 20.678122, y: 11.629574}
   m_EdgeRadius: 0
+--- !u!114 &3732305324585716542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171714433645842273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f3157c0e35e6746a2a3155ee5eff1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camPos: {fileID: 6075278719448342524}
+  camScrollPos: {fileID: 0}
+  roomActive: 1
+  CamVariation: 0
 --- !u!1 &1171714433823751734
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,18 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomManager : MonoBehaviour
+public class RoomGenerator : MonoBehaviour
 {
     [Header("Components")]
-
+    
     public DungeonManager dungeonManager;
-    private CameraMover cam;
-    public GameObject camPos;
-
-    [Header("In-Game Attributes")]
-    public bool roomActive = true;
-
-
+    
     [Header("Dungeon Creation")]
     public GameObject roomPrefab;
     public bool isStartingRoom;
@@ -23,18 +17,19 @@ public class RoomManager : MonoBehaviour
     [Header("Connectors")]
 
     public Connector[] connectors;
-    public float topOffset;
-    public float bottomOffset;
-    public float leftOffset;
-    public float rightOffset;
+    public Vector3 topOffset;
+    public Vector3 bottomOffset;
+    public Vector3 leftOffset;
+    public Vector3 rightOffset;
 
 
 
 
     private void Awake()
     {
-        cam = Camera.main.GetComponent<CameraMover>();
-       // dungeonManager = GameObject.FindGameObjectWithTag("DungeonManager").GetComponent<DungeonManager>();
+        
+       
+        dungeonManager = GameObject.FindGameObjectWithTag("DungeonManager").GetComponent<DungeonManager>();
     }
 
 
@@ -59,7 +54,7 @@ public class RoomManager : MonoBehaviour
                 if (rdm <= 75 && dungeonManager.currentRooms < dungeonManager.roomMax)
                 {
                     var GO = Instantiate(roomPrefab, connector.connection.transform.position, Quaternion.identity);
-                    var newRoom = GO.GetComponent<RoomManager>();
+                    var newRoom = GO.GetComponent<RoomGenerator>();
                     AllignRoom(connector, newRoom);
                     dungeonManager.currentRooms++;
                     dungeonManager.activeRooms.Add(newRoom);
@@ -73,10 +68,10 @@ public class RoomManager : MonoBehaviour
                 }
 
             }
-            
+
         }
         finished = true;
-        
+
         CheckDungeon();
     }
 
@@ -96,7 +91,7 @@ public class RoomManager : MonoBehaviour
                     Destroy(this.gameObject);
                 }
 
-               
+
             }
         }
     }
@@ -111,30 +106,30 @@ public class RoomManager : MonoBehaviour
             if (item.gameObject.CompareTag("Connector"))
             {
                 connector.EnableWall();
-                
+
             }
         }
 
     }
 
-    public void AllignRoom(Connector connector, RoomManager newRoom)
+    public void AllignRoom(Connector connector, RoomGenerator newRoom)
     {
 
-        
+
         Vector3 offset;
         switch (connector.connectorPos)
         {
             case Connector.direction.TOP:
-                offset = new Vector3(0, topOffset, 0);
+                offset = topOffset;
                 break;
             case Connector.direction.BOTTOM:
-                offset = new Vector3(0, bottomOffset, 0);
+                offset = bottomOffset;
                 break;
             case Connector.direction.LEFT:
-                offset = new Vector3(leftOffset, 0, 0);
+                offset = leftOffset;
                 break;
             case Connector.direction.RIGHT:
-                offset = new Vector3(rightOffset, 0, 0);
+                offset = rightOffset;
                 break;
             default:
                 offset = new Vector3(0, 0, 0);
@@ -150,15 +145,15 @@ public class RoomManager : MonoBehaviour
                 newconnectors.isDoor = true;
                 newconnectors.DisableWall();
             }
-            
+
         }
     }
 
 
     public void CheckDungeon()
     {
-        
-        
+
+
         if (dungeonManager.currentRooms == dungeonManager.roomMax)
         {
             print("dungeon complete");
@@ -173,21 +168,6 @@ public class RoomManager : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            roomActive = true;
-            cam.MoveCamera(camPos.transform);
-        }   
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            roomActive = false;
-        }
-    }
+   
 }
 

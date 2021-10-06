@@ -12,13 +12,13 @@ public class DungeonManager : MonoBehaviour
    
 
 
-    public List<RoomManager> activeRooms = new List<RoomManager>();
+    public List<RoomGenerator> activeRooms = new List<RoomGenerator>();
     public int nextRoom = 0;
 
     private void Awake()
     {
         startingRoom = GameObject.FindGameObjectWithTag("StartingRoom");
-        startingRoom.GetComponent<RoomManager>().AssignConnectors();
+        startingRoom.GetComponent<RoomGenerator>().AssignConnectors();
     }
 
    
